@@ -1,1 +1,8 @@
-//Por el momento no le ponemos nada
+//Aqui tambien declaramos las dependencias especificas del proyecto
+//lo podemos aser aqui como en el build.gradle de el proyecto padre 
+
+dependencies {
+	
+	compile project(':bookmule-core-domain')
+	
+}

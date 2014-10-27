@@ -1,1 +1,6 @@
-//Por el momento no llevara nada
+//Declaramos la dependencia
+dependencies {
+	
+	compile project (':bookmule-persistence');
+	
+}

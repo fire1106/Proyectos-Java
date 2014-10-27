@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+		
+	
+	<!-- Scanearemos el codigo para que nos agregue nuestros beans declarados en el codigo -->
+	<context:component-scan base-package="com.synergyj.bookmule.persistence.jdbc"/>
+	
+	<!-- Llamamos el archivo properties -->
+	<util:properties id="propiedades" location="classpath:/jdbc.properties"></util:properties>
+	
+	<!-- Declaramos el placeHolder para spell -->
+	<context:property-placeholder properties-ref="propiedades"/>
+	
+	<!-- Declaramos nuestro bean dataSource -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${bd.driverClassName}"></property>
+		<property name="url" value="${bd.url}"></property>
+		<property name="username" value="${bd.username}"></property>
+		<property name="password" value="${bd.password}"></property>
+	</bean>
+
+	<!-- Indicamos que spring va a ser el administrador de las transacciones de la base de datos -->
+	<bean id="transaccionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+
+</beans>

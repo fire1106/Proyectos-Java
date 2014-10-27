@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd">
+
+	<!-- LLamamos el archivo properties y lo combertimos en un bean -->
+	<util:properties id="propiedades" location="classpath:/jdbc.properties"></util:properties>
+	
+	<!-- Declaramos el placeholder usando el bean propiedades para que funcione spell -->
+	<context:property-placeholder properties-ref="propiedades"/>
+	
+	<!-- Creamos el dataSource declarando el bean con una clase de el paquete commos declarado en las dependencias -->
+	<!-- Declaramos las propiedades con los valores del properties -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${bd.driverClassName}"></property>
+		<property name="url" value="${bd.url}"></property>
+		<property name="username" value="${bd.username}"></property>
+		<property name="password" value="${bd.password}"></property>
+	</bean>
+
+</beans>
