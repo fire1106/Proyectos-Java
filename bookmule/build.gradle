@@ -1,0 +1,30 @@
+//Delcararemos las dependencias que contendran el proyecto padre y los hijos
+subprojects {
+	
+	apply plugin: 'java'	//Estamos declarando los plugins utilizados
+	apply plugin: 'eclipse'
+	
+	version = '0.0.1' 		//Estamos declarando una variable que contendra la version utilizada
+	
+	def defaultEncoding = 'ISO-8859-1'	//Estamos definiendo en este caso la codificacion utilizada en el sistema
+	compileJava{options.encoding = defaultEncoding}	//Definimos la codificacion del compilador
+	compileTestJava{options.encoding = defaultEncoding}	//Defininmos la codificacion utilizada para las pruebas
+	
+	//Usaremos los repositorios de maven
+	repositories{mavenCentral()}
+	
+	//Declararemos las dependencias que utilizaremos en el proyecto general
+	dependencies {
+		
+		compile 'org.slf4j:slf4j-api:1.7.7'  //empleo de SL4J
+
+		runtime 'org.slf4j:slf4j-log4j12:1.7.7' //uso de log4j
+		runtime 'org.slf4j:jcl-over-slf4j:1.7.7' //puente  java commons-logging con sl4j
+
+		testCompile 'junit:junit:4.11' //Declaramos la version de pruebas
+		
+	}
+	
+	configurations {compile.exclude module: 'commons-logging'} //Rechazamos que se compile esta libreria que tiene por defualt spring
+	
+}

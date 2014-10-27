@@ -1,0 +1,3 @@
+//este archivo contendra los proyectos hijos o dependientes del proyecto principal o padre
+
+include "bookmule-core-domain" , "bookmule-persistence" , "bookmule-persistence-jdbc"
